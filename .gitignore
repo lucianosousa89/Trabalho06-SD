@@ -1,0 +1,20 @@
+# Aplicação usada nos testes de desempenho
+spring-petclinic-microservices/
+
+# Resultados e arquivos gerados pelas execuções
+results/
+results_teste_rapido/
+
+# Artefatos do Python
+__pycache__/
+*.py[cod]
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Configurações locais
+.env
+.env.*
+!.env.example
