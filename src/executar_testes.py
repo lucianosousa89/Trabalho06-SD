@@ -19,9 +19,6 @@ PROJECT_DIR = BASE_DIR.parent
 LOCUSTFILE = BASE_DIR / "locustfile.py"
 COMPOSE_DIR = PROJECT_DIR / "spring-petclinic-microservices"
 
-# Opções: "rapido", "validacao", "completo", "completo_parte1" ou
-# "completo_parte2".
-MODO_EXECUCAO = "completo"
 HOST = "http://localhost:8080"
 SPAWN_RATE = 5
 PAUSA_ENTRE_EXECUCOES_SEGUNDOS = 2
@@ -33,40 +30,17 @@ TEMPO_MAX_INICIALIZACAO_SEGUNDOS = 180
 INTERVALO_VERIFICACAO_SEGUNDOS = 5
 SERVICOS_TESTE = ("config-server", "discovery-server", "customers-service", "vets-service", "api-gateway")
 
-PROFILES_COMPLETOS = (("leitura", "ReadProfileUser"), ("escrita", "WriteProfileUser"))
-SCENARIOS_COMPLETOS = (("A", 30), ("B", 80), ("C", 150))
-EXECUCOES_COMPLETAS = tuple(
+PERFIS = (("leitura", "ReadProfileUser"), ("escrita", "WriteProfileUser"))
+CENARIOS = (("A", 30), ("B", 80), ("C", 150))
+REPETICOES = 10
+AQUECIMENTO_SEGUNDOS = 60
+DURACAO_MEDICAO_SEGUNDOS = 360
+EXECUCOES = tuple(
     (profile, user_class, scenario, users)
-    for profile, user_class in PROFILES_COMPLETOS
-    for scenario, users in SCENARIOS_COMPLETOS
+    for profile, user_class in PERFIS
+    for scenario, users in CENARIOS
 )
-
-if MODO_EXECUCAO == "rapido":
-    RESULTS_DIR = PROJECT_DIR / "results_teste_rapido"
-    # Cenário C com os mesmos parâmetros da bateria final, porém com uma
-    # repetição por perfil para reduzir o tempo total de execução.
-    REPETICOES, AQUECIMENTO_SEGUNDOS, DURACAO_MEDICAO_SEGUNDOS = 1, 60, 360
-    EXECUCOES, ORDEM_INICIAL, TOTAL_REFERENCIA = (
-        tuple((profile, user_class, "C", 150) for profile, user_class in PROFILES_COMPLETOS), 0, 2,
-    )
-elif MODO_EXECUCAO == "validacao":
-    RESULTS_DIR = PROJECT_DIR / "results_validacao"
-    REPETICOES, AQUECIMENTO_SEGUNDOS, DURACAO_MEDICAO_SEGUNDOS = 1, 60, 360
-    EXECUCOES, ORDEM_INICIAL, TOTAL_REFERENCIA = EXECUCOES_COMPLETAS, 0, 6
-elif MODO_EXECUCAO == "completo_parte1":
-    RESULTS_DIR = PROJECT_DIR / "results"
-    REPETICOES, AQUECIMENTO_SEGUNDOS, DURACAO_MEDICAO_SEGUNDOS = 10, 60, 360
-    # Leitura nos três cenários e escrita no cenário A: execuções 1 a 40.
-    EXECUCOES, ORDEM_INICIAL, TOTAL_REFERENCIA = EXECUCOES_COMPLETAS[:4], 0, 60
-elif MODO_EXECUCAO == "completo_parte2":
-    RESULTS_DIR = PROJECT_DIR / "results"
-    REPETICOES, AQUECIMENTO_SEGUNDOS, DURACAO_MEDICAO_SEGUNDOS = 10, 60, 360
-    # Escrita nos cenários B e C: execuções 41 a 60.
-    EXECUCOES, ORDEM_INICIAL, TOTAL_REFERENCIA = EXECUCOES_COMPLETAS[4:], 40, 60
-else:
-    RESULTS_DIR = PROJECT_DIR / "results"
-    REPETICOES, AQUECIMENTO_SEGUNDOS, DURACAO_MEDICAO_SEGUNDOS = 10, 60, 360
-    EXECUCOES, ORDEM_INICIAL, TOTAL_REFERENCIA = EXECUCOES_COMPLETAS, 0, 60
+RESULTS_DIR = PROJECT_DIR / "results"
 
 RAW_DIR = RESULTS_DIR / "raw"
 LOCUST_DIR = RAW_DIR / "locust"
@@ -252,14 +226,14 @@ def main() -> None:
         if (run[0], run[2], run[3], run[4]) not in completed
     ]
     completed_current = len(planned_runs) - len(pending_runs)
-    total = TOTAL_REFERENCIA
+    total = len(planned_runs)
     if completed:
         print(f"Retomando bateria: {completed_current} concluídas nesta etapa; {len(pending_runs)} pendentes.")
     if not pending_runs:
         print(f"\nBateria já concluída. Resultados em {RESULTS_DIR}")
         return
     for current, (profile, user_class, scenario, users, repetition) in enumerate(
-        pending_runs, start=ORDEM_INICIAL + completed_current + 1,
+        pending_runs, start=completed_current + 1,
     ):
         print(f"\nExecução {current}/{total}")
         if REINICIAR_AMBIENTE_ENTRE_EXECUCOES:
