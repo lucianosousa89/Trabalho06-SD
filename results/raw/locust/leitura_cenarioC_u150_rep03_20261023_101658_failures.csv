@@ -1,0 +1,5 @@
+Method,Name,Error,Occurrences,First Seen,Last Seen
+GET,/api/customer/owners,HTTPError('405 Client Error: Method Not Allowed for url: /api/customer/owners'),7691,2026-10-23T13:20:08Z,2026-10-23T13:23:58Z
+GET,/api/customer/owners/[id],HTTPError('405 Client Error: Method Not Allowed for url: /api/customer/owners/[id]'),6003,2026-10-23T13:20:08Z,2026-10-23T13:23:58Z
+GET,/api/vet/vets,HTTPError('405 Client Error: Method Not Allowed for url: /api/vet/vets'),2516,2026-10-23T13:20:08Z,2026-10-23T13:23:58Z
+POST,/api/customer/owners [POST],HTTPError('503 Server Error: Service Unavailable for url: /api/customer/owners [POST]'),868,2026-10-23T13:20:08Z,2026-10-23T13:23:58Z

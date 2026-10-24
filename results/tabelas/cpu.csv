@@ -1,0 +1,13 @@
+﻿perfil,cenario,usuarios,servico,repeticoes,cpu_pct,memoria_pct
+escrita,A,30,customers-service,10,41.12,99.73
+escrita,A,30,vets-service,10,4.93,93.06
+escrita,B,80,customers-service,10,204.98,84.88
+escrita,B,80,vets-service,10,5.82,69.04
+escrita,C,150,customers-service,10,177.38,87.79
+escrita,C,150,vets-service,10,3.93,68.91
+leitura,A,30,customers-service,10,18.13,98.53
+leitura,A,30,vets-service,10,4.34,90.05
+leitura,B,80,customers-service,10,112.48,99.66
+leitura,B,80,vets-service,10,8.59,94.00
+leitura,C,150,customers-service,10,277.20,99.86
+leitura,C,150,vets-service,10,7.84,93.79

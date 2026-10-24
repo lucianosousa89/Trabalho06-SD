@@ -1,0 +1,25 @@
+﻿perfil,cenario,usuarios,operacao,repeticoes,media_ms,p95_ms,vazao_req_s,requisicoes,falhas,falhas_pct
+escrita,A,30,/api/customer/owners,10,95.59,182.00,2.93,10523,0,0.00
+escrita,A,30,/api/customer/owners [POST],10,47.11,59.80,5.90,21193,0,0.00
+escrita,A,30,/api/customer/owners/[id],10,9.00,13.50,2.90,10422,0,0.00
+escrita,A,30,/api/vet/vets,10,12.48,20.80,2.89,10392,0,0.00
+escrita,B,80,/api/customer/owners,10,1196.48,7620.00,6.18,22159,3924,17.71
+escrita,B,80,/api/customer/owners [POST],10,591.10,4200.00,12.34,44234,6483,14.66
+escrita,B,80,/api/customer/owners/[id],10,534.65,4140.00,6.12,21961,3240,14.75
+escrita,B,80,/api/vet/vets,10,9.67,15.80,6.15,22034,2963,13.45
+escrita,C,150,/api/customer/owners,10,1239.93,9940.00,10.63,38099,28242,74.13
+escrita,C,150,/api/customer/owners [POST],10,938.39,8100.00,21.24,76170,54522,71.58
+escrita,C,150,/api/customer/owners/[id],10,878.08,7800.00,10.65,38205,27310,71.48
+escrita,C,150,/api/vet/vets,10,6.83,16.50,10.74,38520,26303,68.28
+leitura,A,30,/api/customer/owners,10,22.47,37.80,6.73,24167,0,0.00
+leitura,A,30,/api/customer/owners [POST],10,54.34,59.80,0.73,2637,0,0.00
+leitura,A,30,/api/customer/owners/[id],10,8.82,13.30,5.16,18535,0,0.00
+leitura,A,30,/api/vet/vets,10,12.98,21.20,2.19,7869,0,0.00
+leitura,B,80,/api/customer/owners,10,66.15,160.30,17.54,62939,2437,3.87
+leitura,B,80,/api/customer/owners [POST],10,54.58,72.90,1.98,7109,275,3.87
+leitura,B,80,/api/customer/owners/[id],10,15.39,30.90,13.75,49345,1823,3.69
+leitura,B,80,/api/vet/vets,10,14.85,35.00,5.84,20945,777,3.71
+leitura,C,150,/api/customer/owners,10,110.51,365.00,32.52,116727,64084,54.90
+leitura,C,150,/api/customer/owners [POST],10,114.27,144.10,3.60,12918,7043,54.52
+leitura,C,150,/api/customer/owners/[id],10,63.55,102.80,25.15,90287,49658,55.00
+leitura,C,150,/api/vet/vets,10,9.82,23.90,10.73,38522,20934,54.34
